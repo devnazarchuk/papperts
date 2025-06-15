@@ -59,15 +59,15 @@ export const homeTranslations: Record<Language, HomeTranslations> = {
           'Finde eine Papperts-Filiale in deiner Nähe und entdecke unsere Angebote vor Ort.',
       },
       coupons: {
-        title: 'Coupons & Aktionen',
+        title: 'Coupons Aktionen',
         description: 'Sichere dir aktuelle Rabatte und Gutscheine für deinen Einkauf.',
       },
       news: {
-        title: 'News & Presse',
+        title: 'News Presse',
         description: 'Bleibe auf dem Laufenden mit unseren Neuigkeiten und Pressemitteilungen.',
       },
       contact: {
-        title: 'Kontakt & Clubs',
+        title: 'Kontakt',
         description: 'Nimm Kontakt auf oder entdecke unsere Vereinsangebote.',
       },
     },
@@ -105,15 +105,15 @@ export const homeTranslations: Record<Language, HomeTranslations> = {
         description: 'Find a Papperts store near you and discover our local offerings.',
       },
       coupons: {
-        title: 'Coupons & Promotions',
+        title: 'Coupons Promotions',
         description: 'Secure current discounts and vouchers for your purchase.',
       },
       news: {
-        title: 'News & Press',
+        title: 'News Press',
         description: 'Stay up to date with our news and press releases.',
       },
       contact: {
-        title: 'Contact & Clubs',
+        title: 'Contact',
         description: 'Get in touch or discover our club offerings.',
       },
     },

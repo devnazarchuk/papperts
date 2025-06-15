@@ -3,7 +3,158 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { FaAward } from 'react-icons/fa'
 
+import { useLanguageStore } from '@/app/store/languageStore'
 import InfoPage from '@/components/templates/InfoPage'
+
+type Translations = {
+  de: {
+    title: string
+    subtitle: string
+    description: string
+    sections: {
+      title: string
+      content: string
+      details: string[]
+    }[]
+    contact: {
+      title: string
+      name: string
+      email: string
+      club: string
+      message: string
+      submit: string
+      success: string
+      selectPlaceholder: string
+    }
+  }
+  en: {
+    title: string
+    subtitle: string
+    description: string
+    sections: {
+      title: string
+      content: string
+      details: string[]
+    }[]
+    contact: {
+      title: string
+      name: string
+      email: string
+      club: string
+      message: string
+      submit: string
+      success: string
+      selectPlaceholder: string
+    }
+  }
+}
+
+const translations: Translations = {
+  de: {
+    title: 'Clubs & Community',
+    subtitle:
+      'Werden Sie Teil unserer Bäckerei-Community! Hier finden Sie alle Informationen zu unseren Clubs, Mitgliedschaften und exklusiven Vorteilen.',
+    description:
+      'Entdecken Sie unsere verschiedenen Clubs und Mitgliedschaftsprogramme für unterschiedliche Interessen und Altersgruppen.',
+    sections: [
+      {
+        title: 'Pappert Plus Club',
+        content:
+          'Werden Sie Teil unseres exklusiven Treueprogramms und genießen Sie besondere Vorteile, Rabatte und frühen Zugang zu saisonalen Produkten. Sammeln Sie Punkte bei jedem Einkauf und lösen Sie diese für köstliche Belohnungen ein.',
+        details: [
+          'Punkte bei jedem Einkauf',
+          'Geburtstags-Specials',
+          'Exklusive Mitglieder-Events',
+          'Monatlicher Newsletter',
+        ],
+      },
+      {
+        title: 'Fitness Baker Club',
+        content:
+          'Für gesundheitsbewusste Kunden, die aktiv bleiben möchten. Verbinden Sie Ihre Leidenschaft für Fitness mit nahrhaften Backwaren und nehmen Sie an unseren Sportveranstaltungen teil.',
+        details: [
+          'Ernährungsworkshops',
+          'Gruppenfitness-Aktivitäten',
+          'Gesunde Rezepte teilen',
+          'Sportveranstaltungs-Rabatte',
+        ],
+      },
+      {
+        title: 'Kids Baking Club',
+        content:
+          'Ein lustiger Club für junge Backbegeisterte! Kinder lernen durch praktische Aktivitäten und besondere Events alles über Backen, Ernährung und Lebensmittelwissenschaft.',
+        details: [
+          'Monatliche Backkurse',
+          'Ferienworkshops',
+          'Geburtstagsfeier-Optionen',
+          'Rezepte zum Mitnehmen',
+        ],
+      },
+    ],
+    contact: {
+      title: 'Club Kontaktformular',
+      name: 'Name*',
+      email: 'E-Mail*',
+      club: 'Club*',
+      message: 'Nachricht*',
+      submit: 'Absenden',
+      success: 'Vielen Dank für Ihre Nachricht! Wir melden uns bald bei Ihnen.',
+      selectPlaceholder: 'Bitte wählen…',
+    },
+  },
+  en: {
+    title: 'Clubs & Community',
+    subtitle:
+      "Become part of our bakery community! Here you'll find all information about our clubs, memberships, and exclusive benefits.",
+    description:
+      'Discover our various clubs and membership programs for different interests and age groups.',
+    sections: [
+      {
+        title: 'Pappert Plus Club',
+        content:
+          'Join our exclusive loyalty program and enjoy special benefits, discounts, and early access to seasonal products. Earn points with every purchase and redeem them for delicious rewards.',
+        details: [
+          'Points on every purchase',
+          'Birthday specials',
+          'Exclusive member events',
+          'Monthly newsletter',
+        ],
+      },
+      {
+        title: 'Fitness Baker Club',
+        content:
+          'For health-conscious customers who love staying active. Combine your passion for fitness with nutritious baked goods and participate in our sports events.',
+        details: [
+          'Nutrition workshops',
+          'Group fitness activities',
+          'Healthy recipe sharing',
+          'Sports event discounts',
+        ],
+      },
+      {
+        title: 'Kids Baking Club',
+        content:
+          'A fun club for young baking enthusiasts! Children learn about baking, nutrition, and food science through hands-on activities and special events.',
+        details: [
+          'Monthly baking classes',
+          'Holiday workshops',
+          'Birthday party options',
+          'Take-home recipes',
+        ],
+      },
+    ],
+    contact: {
+      title: 'Club Contact Form',
+      name: 'Name*',
+      email: 'Email*',
+      club: 'Club*',
+      message: 'Message*',
+      submit: 'Submit',
+      success: "Thank you for your message! We'll get back to you soon.",
+      selectPlaceholder: 'Please select…',
+    },
+  },
+}
 
 const clubsSections = [
   {
@@ -48,6 +199,8 @@ const clubsSections = [
 ]
 
 export default function ClubsPage() {
+  const language = useLanguageStore((state) => state.language)
+
   return (
     <motion.div
       initial="hidden"
@@ -68,19 +221,23 @@ export default function ClubsPage() {
               className="text-4xl font-bold text-[#EE0A24] dark:text-[#EE0A24]"
               style={{ fontFamily: 'Poppins, sans-serif' }}
             >
-              Clubs & Community
+              {translations[language].title}
             </h1>
           </div>
           <p className="mx-auto max-w-2xl text-lg text-gray-700 dark:text-gray-300">
-            Werden Sie Teil unserer Bäckerei-Community! Hier finden Sie alle Informationen zu
-            unseren Clubs, Mitgliedschaften und exklusiven Vorteilen.
+            {translations[language].subtitle}
           </p>
         </motion.div>
         <InfoPage
-          title="Unsere Clubs"
-          description="Entdecken Sie unsere verschiedenen Clubs und Mitgliedschaftsprogramme für unterschiedliche Interessen und Altersgruppen."
+          title={translations[language].sections[0].title}
+          description={translations[language].description}
           heroImage="/soft-images/pappert-plus.jpg"
-          sections={clubsSections}
+          sections={clubsSections.map((section, index) => ({
+            ...section,
+            title: translations[language].sections[index].title,
+            content: translations[language].sections[index].content,
+            details: translations[language].sections[index].details,
+          }))}
         />
         <div className="mx-auto my-16 max-w-2xl px-4">
           <div className="rounded-2xl bg-[#FFF6F6] p-8 shadow-[10px_10px_20px_#e4c6c6,_-10px_-10px_20px_#ffffff] dark:bg-gray-900 dark:shadow-md">
@@ -91,7 +248,7 @@ export default function ClubsPage() {
                   'SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif',
               }}
             >
-              Club Kontaktformular
+              {translations[language].contact.title}
             </h2>
             <ContactClubForm />
           </div>
@@ -102,9 +259,10 @@ export default function ClubsPage() {
 }
 
 function ContactClubForm() {
+  const language = useLanguageStore((state) => state.language)
   const [form, setForm] = useState({ name: '', email: '', club: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
-  const clubs = ['Pappert Plus Club', 'Fitness Baker Club', 'Kids Baking Club']
+  const clubs = translations[language].sections.map((section) => section.title)
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -121,7 +279,7 @@ function ContactClubForm() {
   if (submitted) {
     return (
       <div className="rounded-lg bg-green-100 p-6 text-center font-semibold text-green-800 dark:bg-green-900 dark:text-green-200">
-        Vielen Dank für Ihre Nachricht! Wir melden uns bald bei Ihnen.
+        {translations[language].contact.success}
       </div>
     )
   }
@@ -129,7 +287,9 @@ function ContactClubForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6" autoComplete="on">
       <div>
-        <label className="mb-1 block font-medium text-[#D72638] dark:text-red-200">Name*</label>
+        <label className="mb-1 block font-medium text-[#D72638] dark:text-red-200">
+          {translations[language].contact.name}
+        </label>
         <input
           name="name"
           value={form.name}
@@ -143,7 +303,9 @@ function ContactClubForm() {
         />
       </div>
       <div>
-        <label className="mb-1 block font-medium text-[#D72638] dark:text-red-200">E-Mail*</label>
+        <label className="mb-1 block font-medium text-[#D72638] dark:text-red-200">
+          {translations[language].contact.email}
+        </label>
         <input
           name="email"
           type="email"
@@ -158,7 +320,9 @@ function ContactClubForm() {
         />
       </div>
       <div>
-        <label className="mb-1 block font-medium text-[#D72638] dark:text-red-200">Club*</label>
+        <label className="mb-1 block font-medium text-[#D72638] dark:text-red-200">
+          {translations[language].contact.club}
+        </label>
         <select
           name="club"
           value={form.club}
@@ -170,7 +334,7 @@ function ContactClubForm() {
               'SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif',
           }}
         >
-          <option value="">Bitte wählen…</option>
+          <option value="">{translations[language].contact.selectPlaceholder}</option>
           {clubs.map((club) => (
             <option key={club} value={club}>
               {club}
@@ -180,7 +344,7 @@ function ContactClubForm() {
       </div>
       <div>
         <label className="mb-1 block font-medium text-[#D72638] dark:text-red-200">
-          Nachricht*
+          {translations[language].contact.message}
         </label>
         <textarea
           name="message"
@@ -202,7 +366,7 @@ function ContactClubForm() {
           fontFamily: 'SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif',
         }}
       >
-        Absenden
+        {translations[language].contact.submit}
       </button>
     </form>
   )

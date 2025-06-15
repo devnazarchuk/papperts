@@ -77,16 +77,18 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 350, damping: 32 }}
-              className="fixed inset-0 z-50 flex h-full w-full flex-col items-center justify-center gap-8 bg-gradient-to-b from-[#FFF5E1] via-[#FFF6F6] to-[#FFE2E2] p-6 dark:from-[#232323] dark:via-[#232323] dark:to-[#1A1A1A]"
+              className="fixed inset-0 z-50 flex h-full max-h-screen w-full flex-col items-center justify-center gap-8 overscroll-contain bg-[#FFF6F6]/95 p-6 backdrop-blur-xl dark:bg-[#232323]/95"
               aria-label="Mobile Navigation"
+              aria-modal="true"
               tabIndex={-1}
+              style={{ touchAction: 'manipulation' }}
             >
               <button
                 onClick={onClose}
                 aria-label={t.header.menuClose}
-                className="absolute top-6 right-6 rounded-full bg-[#FFD6D6] p-3 text-[#D72638] shadow focus:ring-2 focus:ring-[#FFD6D6] focus:outline-none"
+                className="absolute top-6 right-6 rounded-xl bg-[#FFF6F6]/50 p-2 text-[#D72638] backdrop-blur-sm transition-all duration-200 hover:bg-[#FFF6F6]/70 focus:ring-2 focus:ring-[#FFD6D6] focus:outline-none dark:bg-[#232323]/50 dark:text-[#FFF5E1] dark:hover:bg-[#232323]/70"
               >
-                <X size={32} />
+                <X size={24} />
               </button>
               <div className="flex w-full max-w-lg flex-col items-center justify-center gap-5 px-1 sm:px-0">
                 {navLinks.map((item) => (
@@ -94,7 +96,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     key={item.name}
                     href={item.href}
                     aria-current={pathname === item.href ? 'page' : undefined}
-                    className="mx-auto flex w-full max-w-[320px] min-w-0 flex-col items-center justify-center gap-3 rounded-[28px] bg-[#FFF6F6] px-2 py-6 text-[#c60627] shadow-[0_8px_32px_#e4c6c6] transition-all duration-200 hover:bg-[#FFE2E2] sm:max-w-xs sm:gap-4 sm:px-4 sm:py-8 dark:bg-[#232323] dark:text-[#FFA5A5] dark:shadow-[0_8px_32px_#181818] dark:hover:bg-[#181818]"
+                    className="mx-auto flex w-full max-w-[320px] min-w-0 flex-col items-center justify-center gap-3 rounded-[28px] bg-[#FFF6F6]/50 px-2 py-6 text-[#c60627] backdrop-blur-sm transition-all duration-200 hover:bg-[#FFF6F6]/70 sm:max-w-xs sm:gap-4 sm:px-4 sm:py-8 dark:bg-[#232323]/50 dark:text-[#FFA5A5] dark:hover:bg-[#232323]/70"
                     onClick={onClose}
                   >
                     <div
@@ -111,7 +113,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                         alt=""
                         width={70}
                         height={70}
-                        className="rounded-full bg-[#FFF5E1] shadow-md dark:bg-[#181818]"
+                        className="rounded-full bg-[#FFF5E1]/50 p-2 backdrop-blur-sm dark:bg-[#232323]/50"
                       />
                       <span
                         className="mt-2 mb-1 text-center text-xl font-bold break-words"

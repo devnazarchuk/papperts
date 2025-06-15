@@ -2,77 +2,172 @@
 import { motion } from 'framer-motion'
 import { FaAppleAlt, FaAward, FaHandshake, FaHistory, FaNewspaper, FaUserTie } from 'react-icons/fa'
 
+import { useLanguageStore } from '@/app/store/languageStore'
 import { CardGrid } from '@/components/ui/CardGrid'
 import { PageWrapper } from '@/components/ui/PageWrapper'
 import { SoftCard } from '@/components/ui/SoftCard'
 
+type Translations = {
+  de: {
+    title: string
+    cards: {
+      history: {
+        title: string
+        description: string
+      }
+      masterBakers: {
+        title: string
+        description: string
+      }
+      freshnessPromise: {
+        title: string
+        description: string
+      }
+      nutrition: {
+        title: string
+        description: string
+      }
+      press: {
+        title: string
+        description: string
+      }
+      clubs: {
+        title: string
+        description: string
+      }
+    }
+  }
+  en: {
+    title: string
+    cards: {
+      history: {
+        title: string
+        description: string
+      }
+      masterBakers: {
+        title: string
+        description: string
+      }
+      freshnessPromise: {
+        title: string
+        description: string
+      }
+      nutrition: {
+        title: string
+        description: string
+      }
+      press: {
+        title: string
+        description: string
+      }
+      clubs: {
+        title: string
+        description: string
+      }
+    }
+  }
+}
+
+const translations: Translations = {
+  de: {
+    title: 'Über Uns',
+    cards: {
+      history: {
+        title: 'Unsere Geschichte',
+        description: 'Von bescheidenen Anfängen bis heute – unsere Bäckertradition.',
+      },
+      masterBakers: {
+        title: 'Meisterbäcker',
+        description: 'Lernen Sie unsere Bäckermeister und ihr Handwerk kennen.',
+      },
+      freshnessPromise: {
+        title: 'Frische-Versprechen',
+        description: 'Unsere Garantie für tägliche Frische.',
+      },
+      nutrition: {
+        title: 'Ernährung',
+        description: 'Ausgewogen, gesund und lecker.',
+      },
+      press: {
+        title: 'Presse',
+        description: 'Neuigkeiten, Auszeichnungen und Medienberichte.',
+      },
+      clubs: {
+        title: 'Clubs',
+        description: 'Werden Sie Teil unserer Bäckerei-Community.',
+      },
+    },
+  },
+  en: {
+    title: 'About Us',
+    cards: {
+      history: {
+        title: 'Our History',
+        description: 'From humble beginnings to today – our baking tradition.',
+      },
+      masterBakers: {
+        title: 'Master Bakers',
+        description: 'Get to know our master bakers and their craft.',
+      },
+      freshnessPromise: {
+        title: 'Freshness Promise',
+        description: 'Our guarantee for daily freshness.',
+      },
+      nutrition: {
+        title: 'Nutrition',
+        description: 'Balanced, healthy, and delicious.',
+      },
+      press: {
+        title: 'Press',
+        description: 'News, awards, and media coverage.',
+      },
+      clubs: {
+        title: 'Clubs',
+        description: 'Become part of our bakery community.',
+      },
+    },
+  },
+}
+
 const aboutCards = [
   {
-    title: 'Unsere Geschichte',
-    description: 'Von bescheidenen Anfängen bis heute – unsere Bäckertradition.',
+    title: 'history',
+    description: 'history',
     icon: <FaHistory className="text-[#EE0A24] dark:text-[#EE0A24]" size={48} />,
     href: '/about/history',
     image: '/soft-images/history.jpg',
   },
-  // {
-  //   title: 'Unsere Marken',
-  //   description: 'Entdecken Sie unsere vielfältigen Bäckerei-Marken.',
-  //   icon: <FaUsers className="text-[#EE0A24] dark:text-[#EE0A24]" size={48} />,
-  //   href: '/about/ourbrands',
-  //   image: '/images/124_12.jpg',
-  // },
-  // {
-  //   title: 'Nachhaltigkeit',
-  //   description: 'So backen wir mit Verantwortung für die Umwelt.',
-  //   icon: <FaLeaf className="text-[#EE0A24] dark:text-[#EE0A24]" size={48} />,
-  //   href: '/about/sustainability',
-  //   image: '/soft-images/field.jpg',
-  // },
   {
-    title: 'Meisterbäcker',
-    description: 'Lernen Sie unsere Bäckermeister und ihr Handwerk kennen.',
+    title: 'masterBakers',
+    description: 'masterBakers',
     icon: <FaUserTie className="text-[#EE0A24] dark:text-[#EE0A24]" size={48} />,
     href: '/about/master-bakers',
     image: '/soft-images/about-baker.jpg',
   },
-  // {
-  //   title: 'Regional Roggt',
-  //   description: 'Unser Bekenntnis zu regionalen Zutaten.',
-  //   icon: <FaSeedling className="text-[#EE0A24] dark:text-[#EE0A24]" size={48} />,
-  //   href: '/about/regional-roggt',
-  //   image: '/soft-images/ingredients-flour.jpg',
-  // },
-  // {
-  //   title: 'Höchster Stollen',
-  //   description: 'Prämierte Stollen und süße Traditionen.',
-  //   icon: <FaMedal className="text-[#EE0A24] dark:text-[#EE0A24]" size={48} />,
-  //   href: '/about/highest-stollen',
-  //   image: '/soft-images/products-stollen.jpg',
-  // },
   {
-    title: 'Frische-Versprechen',
-    description: 'Unsere Garantie für tägliche Frische.',
+    title: 'freshnessPromise',
+    description: 'freshnessPromise',
     icon: <FaHandshake className="text-[#EE0A24] dark:text-[#EE0A24]" size={48} />,
     href: '/about/freshness-promise',
     image: '/soft-images/frische-versprechen.jpg',
   },
   {
-    title: 'Ernährung',
-    description: 'Ausgewogen, gesund und lecker.',
+    title: 'nutrition',
+    description: 'nutrition',
     icon: <FaAppleAlt className="text-[#EE0A24] dark:text-[#EE0A24]" size={48} />,
     href: '/about/nutrition',
     image: '/soft-images/healthy.jpg',
   },
   {
-    title: 'Presse',
-    description: 'Neuigkeiten, Auszeichnungen und Medienberichte.',
+    title: 'press',
+    description: 'press',
     icon: <FaNewspaper className="text-[#EE0A24] dark:text-[#EE0A24]" size={48} />,
     href: '/about/press',
     image: '/soft-images/Pappert_painting.webp',
   },
   {
-    title: 'Clubs',
-    description: 'Werden Sie Teil unserer Bäckerei-Community.',
+    title: 'clubs',
+    description: 'clubs',
     icon: <FaAward className="text-[#EE0A24] dark:text-[#EE0A24]" size={48} />,
     href: '/about/clubs',
     image: '/soft-images/pappert-plus.jpg',
@@ -102,6 +197,8 @@ const itemVariants = {
 }
 
 export default function AboutPage() {
+  const language = useLanguageStore((state) => state.language)
+
   return (
     <>
       <head>
@@ -133,15 +230,21 @@ export default function AboutPage() {
             className="mb-8 text-center text-3xl font-extrabold text-[#EE0A24] md:text-5xl dark:text-white"
             style={{ fontFamily: 'Poppins, sans-serif' }}
           >
-            Über Uns
+            {translations[language].title}
           </motion.h1>
           <motion.div variants={itemVariants}>
             <CardGrid>
               {aboutCards.map((card) => (
                 <SoftCard
                   key={card.title}
-                  title={card.title}
-                  description={card.description}
+                  title={
+                    translations[language].cards[card.title as keyof typeof translations.de.cards]
+                      .title
+                  }
+                  description={
+                    translations[language].cards[card.title as keyof typeof translations.de.cards]
+                      .description
+                  }
                   icon={card.icon}
                   href={card.href}
                   image={card.image}

@@ -1,94 +1,104 @@
 'use client'
-import TrainersList from '@/components/templates/TrainersPage';
+import { motion } from 'framer-motion'
+import Image from 'next/image'
 
-const trainers = [
-  {
-    name: 'Harald Döppner',
-    title: 'Head Trainer & E-Bike Specialist',
-    bio: 'With over 15 years of experience in cycling and fitness training, Harald leads our E-Bike programs and specializes in endurance training for all fitness levels.',
-    image: '/soft-images/mann.jpg',
-    specialties: [
-      {
-        name: 'E-Bike Training',
-        description: 'Expert in E-Bike techniques, safety, and tour planning for all skill levels.'
-      },
-      {
-        name: 'Endurance Training',
-        description: 'Specialized in building stamina and improving cardiovascular fitness.'
-      },
-      {
-        name: 'Group Dynamics',
-        description: 'Experienced in leading group rides and creating inclusive training environments.'
-      }
-    ],
-    certifications: [
-      'Certified E-Bike Instructor',
-      'Licensed Cycling Coach',
-      'First Aid Specialist',
-      'Mountain Bike Guide'
-    ]
-  },
-  {
-    name: 'Maria Schmidt',
-    title: 'Running Coach & Nutrition Specialist',
-    bio: 'A former competitive runner turned coach, Maria combines her passion for running with expertise in sports nutrition to help clients achieve their fitness goals.',
-    image: '/soft-images/frau.jpg',
-    specialties: [
-      {
-        name: 'Running Technique',
-        description: 'Expert in improving running form and preventing injuries.'
-      },
-      {
-        name: 'Sports Nutrition',
-        description: 'Specialized in creating nutrition plans for athletes and fitness enthusiasts.'
-      },
-      {
-        name: 'Marathon Training',
-        description: 'Experienced in preparing runners for long-distance events.'
-      }
-    ],
-    certifications: [
-      'Certified Running Coach',
-      'Sports Nutrition Specialist',
-      'Marathon Training Expert',
-      'Exercise Physiology Certificate'
-    ]
-  },
-  {
-    name: 'Thomas Weber',
-    title: 'Strength & Conditioning Coach',
-    bio: 'Thomas specializes in functional training and rehabilitation, helping clients build strength and improve mobility through targeted exercise programs.',
-    image: '/soft-images/mann1.jpg',
-    specialties: [
-      {
-        name: 'Functional Training',
-        description: 'Expert in bodyweight exercises and functional movement patterns.'
-      },
-      {
-        name: 'Rehabilitation',
-        description: 'Specialized in post-injury recovery and return to sport programs.'
-      },
-      {
-        name: 'Core Training',
-        description: 'Focus on building core strength and improving posture.'
-      }
-    ],
-    certifications: [
-      'Certified Strength & Conditioning Specialist',
-      'Rehabilitation Therapy Certificate',
-      'Functional Training Expert',
-      'TRX Certified Trainer'
-    ]
-  }
-];
+import { useLanguageStore } from '@/app/store/languageStore'
+import { PageWrapper } from '@/components/ui/PageWrapper'
 
-export default function TrainersPage() {
+import { fitnessBaeckerTranslations } from '../translations'
+
+export default function Trainers() {
+  const { language } = useLanguageStore()
+  const translations = fitnessBaeckerTranslations[language].trainers
+
   return (
-    <TrainersList
-      title="Our Expert Trainers"
-      description="Meet our team of certified fitness professionals dedicated to helping you achieve your health and fitness goals."
-      heroImage="/images/papperts_Fitnessbaecker-team.jpg"
-      trainers={trainers}
-    />
-  );
+    <PageWrapper className="bg-gradient-to-br from-[#FFF6F6] to-[#FFE2E2] dark:from-[#181818] dark:to-[#232323]">
+      {/* Hero Section */}
+      <section className="relative h-[40vh] w-full mb-12">
+        <Image
+          src="/images/papperts_Fitnessbaecker-team.jpg"
+          alt={translations.title}
+          fill
+          className="object-cover rounded-[25px]"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/40 rounded-[25px]" />
+        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white px-4" style={{ fontFamily: 'Poppins, sans-serif' }}>
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="text-4xl font-extrabold mb-4 drop-shadow-lg"
+          >
+            {translations.title}
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
+            className="text-lg max-w-2xl drop-shadow-lg"
+          >
+            {translations.description}
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Trainers Grid */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {Object.entries(translations.trainers).map(([key, trainer]) => (
+            <motion.div
+              key={key}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="bg-white dark:bg-[#232323] rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+            >
+              <div className="relative h-64">
+                <Image
+                  src={trainer.image}
+                  alt={trainer.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-[#D72638] dark:text-[#FFA5A5] mb-2">{trainer.name}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{trainer.title}</p>
+                <p className="text-gray-700 dark:text-gray-300 mb-6">{trainer.bio}</p>
+                
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold text-[#D72638] dark:text-[#FFA5A5] mb-3">Specialties</h4>
+                  <div className="space-y-3">
+                    {Object.entries(trainer.specialties).map(([key, specialty]) => (
+                      <div key={key} className="bg-[#FFF5E1] dark:bg-[#2a2a2a] rounded-lg p-3">
+                        <h5 className="font-medium text-[#D72638] dark:text-[#FFA5A5] mb-1">{specialty.name}</h5>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">{specialty.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold text-[#D72638] dark:text-[#FFA5A5] mb-3">Certifications</h4>
+                  <ul className="space-y-2">
+                    {trainer.certifications.map((cert, index) => (
+                      <li key={index} className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                        <svg className="w-4 h-4 mr-2 text-[#D72638] dark:text-[#FFA5A5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {cert}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+    </PageWrapper>
+  )
 } 

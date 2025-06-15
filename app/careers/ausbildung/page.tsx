@@ -4,35 +4,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaMapMarkerAlt, FaUserPlus } from 'react-icons/fa'
 
-const ausbildungJobs = [
-  {
-    title: 'Ausbildung Konditor (m/w/d)',
-    location: '36124 Eichenzell',
-    img: '/soft-images/job-kondi.jpg',
-  },
-  {
-    title: 'Ausbildung Fachkraft für Lagerlogistik (m/w/d)',
-    location: '36124 Eichenzell',
-    img: '/soft-images/job-lager.jpg',
-  },
-  {
-    title: 'Ausbildung Bäcker (m/w/d)',
-    location: '36124 Eichenzell',
-    img: '/soft-images/job-aus-backer.jpg',
-  },
-  {
-    title: 'Ausbildung Fachverkäufer (m/w/d) im Lebensmittelhandwerk',
-    location: '63450 Hanau',
-    img: '/soft-images/job-fach-sales.jpg',
-  },
-  {
-    title: 'Ausbildung Gebäudereiniger (m/w/d)',
-    location: '36124 Eichenzell',
-    img: '/soft-images/job-clear.jpg',
-  },
-]
+import { useLanguageStore } from '@/app/store/languageStore'
+
+import { ausbildungJobs, ausbildungTranslations } from './languages'
 
 export default function CareersAusbildungPage() {
+  const { language } = useLanguageStore()
+  const t = ausbildungTranslations[language]
+
   return (
     <main className="min-h-screen">
       {/* Header Section */}
@@ -48,7 +27,7 @@ export default function CareersAusbildungPage() {
                 'SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif',
             }}
           >
-            Ausbildung & Praktikum
+            {t.title}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -60,8 +39,7 @@ export default function CareersAusbildungPage() {
                 'SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif',
             }}
           >
-            Starte deine Karriere bei Pappert mit einer Ausbildung oder einem Praktikum. Wir
-            begleiten dich auf deinem Weg ins Berufsleben!
+            {t.subtitle}
           </motion.p>
         </div>
       </section>
@@ -72,7 +50,7 @@ export default function CareersAusbildungPage() {
           <div className="mx-auto mb-12 grid max-w-5xl grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {ausbildungJobs.map((job, i) => (
               <motion.div
-                key={job.title + job.location + i}
+                key={job.title[language] + job.location + i}
                 className="flex flex-col items-center rounded-[25px] bg-[#FFF6F6] p-8 shadow-[10px_10px_24px_#e4c6c6,_-10px_-10px_24px_#ffffff] transition-all hover:-translate-y-1 hover:shadow-xl dark:bg-[#232323] dark:shadow-[10px_10px_24px_#181818,_-10px_-10px_24px_#2a2a2a]"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -82,7 +60,7 @@ export default function CareersAusbildungPage() {
                 <div className="mb-4 flex h-40 w-40 items-center justify-center">
                   <Image
                     src={job.img || '/soft-images/job-default.jpg'}
-                    alt={job.title}
+                    alt={job.title[language]}
                     width={160}
                     height={160}
                     className="h-full w-full rounded-2xl object-cover"
@@ -96,7 +74,7 @@ export default function CareersAusbildungPage() {
                         'SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif',
                     }}
                   >
-                    {job.title}
+                    {job.title[language]}
                   </h3>
                 </div>
                 {job.location && (
@@ -113,7 +91,7 @@ export default function CareersAusbildungPage() {
                         'SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif',
                     }}
                   >
-                    Jetzt bewerben
+                    {t.applyNow}
                   </button>
                 </Link>
               </motion.div>
@@ -136,7 +114,7 @@ export default function CareersAusbildungPage() {
                     'SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif',
                 }}
               >
-                Initiativbewerbung
+                {t.initiativeTitle}
               </h3>
               <p
                 className="mb-6 text-center text-base text-gray-600 transition-colors duration-200 dark:text-gray-300"
@@ -145,8 +123,7 @@ export default function CareersAusbildungPage() {
                     'SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif',
                 }}
               >
-                Du findest keine passende Ausbildungsstelle? Bewirb dich initiativ – wir freuen uns
-                auf dich!
+                {t.initiativeDesc}
               </p>
               <a
                 href="/careers/initiativbewerbung"
@@ -156,7 +133,7 @@ export default function CareersAusbildungPage() {
                     'SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif',
                 }}
               >
-                Express bewerben
+                {t.expressApply}
               </a>
             </motion.div>
           </div>

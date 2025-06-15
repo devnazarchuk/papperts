@@ -1,42 +1,112 @@
 'use client'
-import FitnessPage from '@/components/templates/FitnessPage';
+import { motion } from 'framer-motion'
+import Image from 'next/image'
 
-const eBikeEvent = {
-  title: 'E-Bike Power',
-  description: 'Learn from E-Bike expert Harald Döppner and discover the beautiful Rhön region on state-of-the-art electric bikes. Perfect for both beginners and experienced cyclists.',
-  image: '/images/about-baker.jpg',
-  details: {
-    date: 'September 6, 2025',
-    time: '10:00 AM - 4:00 PM',
-    location: 'Poppenhausen Sports Field',
-    capacity: '20 participants',
-    price: '€79 per person',
-    requirements: [
-      'Basic cycling ability',
-      'Comfortable with basic traffic rules',
-      'Minimum age: 16 years',
-      'Weather-appropriate clothing'
-    ]
+import { useLanguageStore } from '@/app/store/languageStore'
+import { PageWrapper } from '@/components/ui/PageWrapper'
+
+import { fitnessBaeckerTranslations } from '../translations'
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
   },
-  highlights: [
-    'Professional instruction from E-Bike expert Harald Döppner',
-    'Guided tour through scenic Rhön routes',
-    'E-Bike rental included',
-    'Safety and handling workshop',
-    'Energy-efficient riding techniques',
-    'Lunch break with healthy snacks',
-    'Photo documentation',
-    'Certificate of participation'
-  ]
-};
+}
 
-export default function EBikePowerPage() {
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: 'easeOut',
+    },
+  },
+}
+
+export default function EBikePower() {
+  const { language } = useLanguageStore()
+  const translations = fitnessBaeckerTranslations[language].ebikePower
+
   return (
-    <FitnessPage
-      title="E-Bike Power"
-      description="Experience the joy of E-Bike riding while exploring the beautiful Rhön landscape."
-      heroImage="/images/about-baker.jpg"
-      event={eBikeEvent}
-    />
-  );
+    <PageWrapper className="bg-gradient-to-br from-[#FFF6F6] to-[#FFE2E2] dark:from-[#181818] dark:to-[#232323]">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className="container mx-auto px-4 py-8"
+      >
+        <motion.div variants={itemVariants} className="mb-8 text-center">
+          <h1 className="mb-4 text-4xl font-bold text-[#D72638] dark:text-[#FFA5A5]">{translations.title}</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300">{translations.description}</p>
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="mb-12">
+          <div className="relative h-[400px] w-full overflow-hidden rounded-2xl">
+            <Image
+              src="/images/E-Bike-Power-Baeckerei-Pappert-1-768x469.jpg"
+              alt={translations.title}
+              fill
+              className="object-cover"
+            />
+          </div>
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="mb-12 rounded-2xl bg-white p-8 shadow-lg dark:bg-[#232323]">
+          <h2 className="mb-6 text-2xl font-bold text-[#D72638] dark:text-[#FFA5A5]">{translations.detailsTitle}</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <p className="text-gray-700 dark:text-gray-300">
+                <span className="font-semibold">{translations.dateLabel}:</span> {translations.date}
+              </p>
+              <p className="text-gray-700 dark:text-gray-300">
+                <span className="font-semibold">{translations.timeLabel}:</span> {translations.time}
+              </p>
+              <p className="text-gray-700 dark:text-gray-300">
+                <span className="font-semibold">{translations.locationLabel}:</span> {translations.location}
+              </p>
+            </div>
+            <div className="space-y-2">
+              <p className="text-gray-700 dark:text-gray-300">
+                <span className="font-semibold">{translations.capacityLabel}:</span> {translations.capacity}
+              </p>
+              <p className="text-gray-700 dark:text-gray-300">
+                <span className="font-semibold">{translations.priceLabel}:</span> {translations.price}
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="mb-12 rounded-2xl bg-white p-8 shadow-lg dark:bg-[#232323]">
+          <h2 className="mb-6 text-2xl font-bold text-[#D72638] dark:text-[#FFA5A5]">{translations.requirementsTitle}</h2>
+          <ul className="list-disc list-inside space-y-2">
+            {translations.requirements.map((req, index) => (
+              <li key={index} className="text-gray-700 dark:text-gray-300">{req}</li>
+            ))}
+          </ul>
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="rounded-2xl bg-white p-8 shadow-lg dark:bg-[#232323]">
+          <h2 className="mb-6 text-2xl font-bold text-[#D72638] dark:text-[#FFA5A5]">{translations.highlightsTitle}</h2>
+          <ul className="list-disc list-inside space-y-2">
+            {translations.highlights.map((highlight, index) => (
+              <li key={index} className="text-gray-700 dark:text-gray-300">{highlight}</li>
+            ))}
+          </ul>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="mt-8 rounded-[20px] bg-[#EE0A24] px-8 py-3 font-semibold text-white shadow-[6px_6px_12px_#e4c6c6,_-6px_-6px_12px_#ffffff] transition-all hover:shadow-[4px_4px_8px_#e4c6c6,_-4px_-4px_8px_#ffffff] dark:bg-[#FFA5A5] dark:text-[#232323] dark:shadow-[6px_6px_12px_#181818,_-6px_-6px_12px_#2a2a2a] dark:hover:shadow-[4px_4px_8px_#181818,_-4px_-4px_8px_#2a2a2a]"
+          >
+            {translations.button}
+          </motion.button>
+        </motion.div>
+      </motion.div>
+    </PageWrapper>
+  )
 } 

@@ -83,12 +83,12 @@ export function AccessibilitySettings() {
       <button
         ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-center rounded-xl p-2 text-[#D72638] transition-all duration-200 hover:bg-[#FFF6F6] focus:ring-2 focus:ring-[#FFD6D6] focus:outline-none dark:text-gray-300 dark:hover:bg-[#232323]"
+        className="rounded-lg !p-1.5 text-[#D72638] !shadow-none transition-all duration-200 hover:bg-[#FFF6F6]/50 hover:text-[#D72638] focus:ring-2 focus:ring-[#FFD6D6] focus:outline-none sm:!p-2 dark:text-[#FFF5E1] dark:hover:bg-[#232323]/50 dark:hover:text-[#FFF5E1]"
         aria-label={t.accessibility.settings}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <Settings className="h-5 w-5" />
+        <Settings className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
       </button>
 
       <AnimatePresence>
@@ -99,63 +99,75 @@ export function AccessibilitySettings() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-[calc(50%+40px)] right-0 left-0 z-50 mx-auto w-full max-w-[320px] -translate-y-1/2 transform rounded-2xl bg-gradient-to-b from-[#FFF5E1] to-[#FFE2E2] p-4 shadow-[10px_10px_20px_#e4c6c6,_-10px_-10px_20px_#ffffff] sm:absolute sm:top-full sm:right-0 sm:left-auto sm:mt-2 sm:w-72 sm:translate-y-0 dark:from-[#232323] dark:to-[#1A1A1A] dark:shadow-[6px_6px_12px_#181818,_-6px_-6px_12px_#2a2a2a]"
+            className="fixed inset-x-3 top-[calc(50%+40px)] z-50 mx-auto w-[calc(100%-1.5rem)] max-w-[280px] -translate-y-1/2 transform rounded-xl bg-[#FFF6F6]/95 p-2 !shadow-none backdrop-blur-xl sm:absolute sm:inset-x-auto sm:top-full sm:right-0 sm:mt-2 sm:w-56 sm:translate-y-0 sm:p-3 dark:bg-[#232323]/95"
             role="menu"
             aria-label={t.accessibility.settings}
           >
-            <div className="space-y-4">
+            <div className="space-y-2 sm:space-y-3">
               {/* Font Size Settings */}
               <div>
-                <h3 className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#D72638] dark:text-[#FFA5A5]">
-                  <Type className="h-4 w-4" />
+                <h3 className="mb-1 flex items-center gap-1 text-[11px] font-medium text-[#D72638] sm:mb-1.5 sm:text-xs dark:text-[#FFA5A5]">
+                  <Type className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                   {t.accessibility.fontSize.title}
                 </h3>
-                <div className="flex gap-2">
+                <div className="grid grid-cols-3 gap-1 sm:gap-1.5">
                   <button
                     onClick={() => handleFontSizeChange('normal')}
-                    className={`flex-1 rounded-lg px-3 py-1.5 text-sm ${
+                    className={`flex items-center justify-center rounded-lg !p-1.5 text-[#3A3A3A] !shadow-none transition-all duration-200 hover:bg-[#FFF6F6]/50 dark:text-[#FAD2E1] dark:hover:bg-[#232323]/50 ${
                       fontSize === 'normal'
                         ? 'bg-[#FFD6D6] text-[#D72638] dark:bg-[#232323] dark:text-[#FFF5E1]'
-                        : 'text-[#3A3A3A] hover:bg-[#FFF6F6] dark:text-[#FAD2E1] dark:hover:bg-[#232323]'
+                        : ''
                     }`}
+                    title={t.accessibility.fontSize.normal}
                   >
-                    {t.accessibility.fontSize.normal}
+                    <div className="flex flex-col items-center gap-0.5">
+                      <Type className="h-3 w-3" />
+                      <span className="text-[8px]">A</span>
+                    </div>
                   </button>
                   <button
                     onClick={() => handleFontSizeChange('medium')}
-                    className={`flex-1 rounded-lg px-3 py-1.5 text-sm ${
+                    className={`flex items-center justify-center rounded-lg !p-1.5 text-[#3A3A3A] !shadow-none transition-all duration-200 hover:bg-[#FFF6F6]/50 dark:text-[#FAD2E1] dark:hover:bg-[#232323]/50 ${
                       fontSize === 'medium'
                         ? 'bg-[#FFD6D6] text-[#D72638] dark:bg-[#232323] dark:text-[#FFF5E1]'
-                        : 'text-[#3A3A3A] hover:bg-[#FFF6F6] dark:text-[#FAD2E1] dark:hover:bg-[#232323]'
+                        : ''
                     }`}
+                    title={t.accessibility.fontSize.medium}
                   >
-                    {t.accessibility.fontSize.medium}
+                    <div className="flex flex-col items-center gap-0.5">
+                      <Type className="h-4 w-4" />
+                      <span className="text-[10px]">A</span>
+                    </div>
                   </button>
                   <button
                     onClick={() => handleFontSizeChange('large')}
-                    className={`flex-1 rounded-lg px-3 py-1.5 text-sm ${
+                    className={`flex items-center justify-center rounded-lg !p-1.5 text-[#3A3A3A] !shadow-none transition-all duration-200 hover:bg-[#FFF6F6]/50 dark:text-[#FAD2E1] dark:hover:bg-[#232323]/50 ${
                       fontSize === 'large'
                         ? 'bg-[#FFD6D6] text-[#D72638] dark:bg-[#232323] dark:text-[#FFF5E1]'
-                        : 'text-[#3A3A3A] hover:bg-[#FFF6F6] dark:text-[#FAD2E1] dark:hover:bg-[#232323]'
+                        : ''
                     }`}
+                    title={t.accessibility.fontSize.large}
                   >
-                    {t.accessibility.fontSize.large}
+                    <div className="flex flex-col items-center gap-0.5">
+                      <Type className="h-5 w-5" />
+                      <span className="text-[12px]">A</span>
+                    </div>
                   </button>
                 </div>
               </div>
 
               {/* Contrast Mode */}
               <div>
-                <h3 className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#D72638] dark:text-[#FFA5A5]">
-                  <Contrast className="h-4 w-4" />
+                <h3 className="mb-1 flex items-center gap-1 text-[11px] font-medium text-[#D72638] sm:mb-1.5 sm:text-xs dark:text-[#FFA5A5]">
+                  <Contrast className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                   {t.accessibility.contrast.title}
                 </h3>
                 <button
                   onClick={handleContrastModeChange}
-                  className={`w-full rounded-lg px-3 py-1.5 text-sm ${
+                  className={`w-full rounded-lg !px-2 !py-1 text-[11px] !shadow-none transition-all duration-200 sm:!px-2.5 sm:!py-1.5 sm:text-xs ${
                     contrastMode === 'high'
                       ? 'bg-[#FFD6D6] text-[#D72638] dark:bg-[#232323] dark:text-[#FFF5E1]'
-                      : 'text-[#3A3A3A] hover:bg-[#FFF6F6] dark:text-[#FAD2E1] dark:hover:bg-[#232323]'
+                      : 'text-[#3A3A3A] hover:bg-[#FFF6F6]/50 dark:text-[#FAD2E1] dark:hover:bg-[#232323]/50'
                   }`}
                 >
                   {contrastMode === 'high'

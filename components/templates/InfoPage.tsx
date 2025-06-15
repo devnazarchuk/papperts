@@ -38,7 +38,7 @@ export default function InfoPage({ title, description, heroImage, sections }: In
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-4 text-4xl font-extrabold text-white drop-shadow-lg"
+            className="mb-4 text-4xl font-extrabold !text-white drop-shadow-lg"
             style={{ fontFamily: 'Poppins, sans-serif' }}
           >
             {title}

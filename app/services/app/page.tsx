@@ -3,24 +3,14 @@ import { motion } from 'framer-motion'
 import Head from 'next/head'
 import Image from 'next/image'
 
-const features = [
-  'Exklusive digitale Coupons zu Geburtstagen und Aktionen',
-  'Push-Benachrichtigungen für aktuelle Rabatte',
-  'Digitale Kundenkarte – immer dabei',
-  'Papperts Punkte sammeln und einlösen',
-  'Mobiles Bezahlen via PayPal, Kreditkarte oder vor Ort',
-  'Frische Backwaren entdecken und Favoriten markieren',
-  'Zutaten, Herkunft und Nährwerte einsehen',
-  'Mehr über die Papperts Bäckerei-Familie erfahren',
-]
+import { useLanguageStore } from '@/app/store/languageStore'
 
-const steps = [
-  'App im App Store oder bei Google Play herunterladen',
-  'Mit kostenlosem Papperts-Konto registrieren',
-  'Sparen und exklusive Angebote in unseren Bäckereien genießen',
-]
+import { appTranslations } from './languages'
 
-export default function PappertsAppPage() {
+export default function AppServices() {
+  const { language } = useLanguageStore()
+  const t = appTranslations[language]
+
   return (
     <>
       <Head>
@@ -38,9 +28,9 @@ export default function PappertsAppPage() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-4 text-4xl font-extrabold text-[#c60627] transition-colors md:text-5xl dark:text-[#EE0A24]"
+              className="mb-4 text-4xl font-extrabold text-white transition-colors md:text-5xl dark:text-white"
             >
-              Deine neue Papperts App
+              {t.title}
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -48,26 +38,26 @@ export default function PappertsAppPage() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="mb-8 text-lg text-gray-700 transition-colors md:text-xl dark:text-[#FFF5E1]"
             >
-              Entdecke exklusive Vorteile – sammle Punkte, spare und genieße mehr.
+              {t.subtitle}
             </motion.p>
             <div id="download" className="flex flex-col justify-center gap-4 sm:flex-row">
               <a
                 href="https://apps.apple.com/de/app/papperts/id1615734130"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block rounded-2xl bg-[#EE0A24] px-6 py-3 font-semibold text-white shadow-md transition-colors duration-200 hover:bg-[#c60627] focus:ring-2 focus:ring-[#EE0A24] focus:outline-none dark:shadow-lg dark:hover:bg-[#FF3B59]"
-                aria-label="Im App Store herunterladen"
+                className="inline-block rounded-full bg-[#D72638] px-6 py-3 font-semibold text-white !text-white shadow transition-all transition-colors hover:bg-[#EE0A24] focus:ring-2 focus:ring-[#D72638] focus:ring-offset-2 focus:outline-none dark:bg-[#FFA5A5] dark:text-[#232323] dark:hover:bg-[#FF3B59]"
+                aria-label={t.downloadAppStore}
               >
-                Im App Store herunterladen
+                {t.downloadAppStore}
               </a>
               <a
                 href="https://play.google.com/store/apps/details?id=com.copago.id4200712&pli=1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block rounded-2xl bg-green-600 px-6 py-3 font-semibold text-white shadow-md transition-colors duration-200 hover:bg-green-700 focus:ring-2 focus:ring-green-400 focus:outline-none dark:shadow-lg dark:hover:bg-green-800"
-                aria-label="Bei Google Play herunterladen"
+                className="inline-block rounded-full bg-[#D72638] px-6 py-3 font-semibold text-white !text-white shadow transition-all transition-colors hover:bg-[#EE0A24] focus:ring-2 focus:ring-[#D72638] focus:ring-offset-2 focus:outline-none dark:bg-[#FFA5A5] dark:text-[#232323] dark:hover:bg-[#FF3B59]"
+                aria-label={t.downloadPlayStore}
               >
-                Bei Google Play herunterladen
+                {t.downloadPlayStore}
               </a>
             </div>
             <div className="mt-10 flex w-full justify-center">
@@ -92,10 +82,10 @@ export default function PappertsAppPage() {
             transition={{ duration: 0.5 }}
             className="mb-8 text-center text-2xl font-bold text-[#c60627] transition-colors dark:text-[#EE0A24]"
           >
-            Warum die Papperts App?
+            {t.whyAppTitle}
           </motion.h2>
           <div className="grid gap-6 sm:grid-cols-2">
-            {features.map((feature, idx) => (
+            {t.features.map((feature, idx) => (
               <motion.div
                 key={feature}
                 initial={{ opacity: 0, y: 30 }}
@@ -124,10 +114,10 @@ export default function PappertsAppPage() {
             transition={{ duration: 0.5 }}
             className="mb-8 text-center text-2xl font-bold text-[#c60627] transition-colors dark:text-[#EE0A24]"
           >
-            So funktioniert&apos;s
+            {t.howItWorksTitle}
           </motion.h2>
           <ol className="space-y-6">
-            {steps.map((step, idx) => (
+            {t.steps.map((step, idx) => (
               <motion.li
                 key={step}
                 initial={{ opacity: 0, y: 30 }}
@@ -136,7 +126,7 @@ export default function PappertsAppPage() {
                 transition={{ duration: 0.4, delay: idx * 0.09 }}
                 className="flex items-start gap-4"
               >
-                <span className="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#EE0A24] text-lg font-bold text-white transition-colors dark:bg-[#232323] dark:text-[#FFA5A5]">
+                <span className="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#EE0A24] text-lg font-bold text-white !text-white transition-colors dark:bg-[#232323] dark:text-[#FFA5A5]">
                   {idx + 1}
                 </span>
                 <span className="text-base text-[#3A3A3A] transition-colors dark:text-[#FFF5E1]">
@@ -165,7 +155,7 @@ export default function PappertsAppPage() {
               transition={{ duration: 0.5 }}
               className="mb-4 text-3xl font-bold text-[#c60627] transition-colors dark:text-[#EE0A24]"
             >
-              Bereit, bei deinen Lieblingsbackwaren zu sparen?
+              {t.ctaTitle}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -174,8 +164,7 @@ export default function PappertsAppPage() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mb-6 text-lg text-[#3A3A3A] transition-colors dark:text-[#FFF5E1]"
             >
-              Werde Teil der Papperts Community und erlebe ein schnelleres, cleveres und lohnenderes
-              Einkaufserlebnis.
+              {t.ctaSubtitle}
             </motion.p>
             <button
               type="button"
@@ -183,10 +172,10 @@ export default function PappertsAppPage() {
                 const el = document.getElementById('download')
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' })
               }}
-              className="inline-block rounded-2xl bg-[#EE0A24] px-8 py-4 font-semibold text-white shadow-md transition-colors duration-200 hover:bg-[#c60627] focus:ring-2 focus:ring-[#EE0A24] focus:outline-none dark:shadow-lg dark:hover:bg-[#FF3B59]"
-              aria-label="App herunterladen"
+              className="inline-block rounded-full bg-[#D72638] px-8 py-4 font-semibold text-white !text-white shadow transition-all transition-colors hover:bg-[#EE0A24] focus:ring-2 focus:ring-[#D72638] focus:ring-offset-2 focus:outline-none dark:bg-[#FFA5A5] dark:text-[#232323] dark:hover:bg-[#FF3B59]"
+              aria-label={t.ctaButton}
             >
-              App herunterladen
+              {t.ctaButton}
             </button>
           </div>
         </section>

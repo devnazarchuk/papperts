@@ -9,7 +9,7 @@ import { useLanguageStore } from '@/app/store/languageStore'
 import { translations } from '@/app/translations'
 
 import { AccessibilitySettings } from '../ui/AccessibilitySettings'
-// import { LanguageSelector } from '../ui/LanguageSelector'
+import { LanguageSelector } from '../ui/LanguageSelector'
 import { ThemeSwitcher } from '../ui/ThemeSwitcher'
 import { DesktopNav } from './DesktopNav'
 import { MobileMenu } from './MobileMenu'
@@ -20,17 +20,13 @@ export default function Header() {
   const t = translations[language]
 
   return (
-    <header
-      className="sticky top-0 z-50 w-full rounded-b-2xl border-b-2 border-[#FFD6D6] bg-gradient-to-b from-[#FFF5E1] to-[#FFE2E2] shadow-[10px_10px_20px_#e4c6c6,_-10px_-10px_20px_#ffffff] backdrop-blur-md dark:border-[#333] dark:from-[#232323] dark:to-[#1A1A1A] dark:shadow-[var(--tw-inset-shadow),6px_6px_12px_var(--tw-shadow-color,_#4c4646),_-6px_-6px_12px_var(--tw-shadow-color,_#342f2f)]"
-      // Neumorphism: custom shadow for dark mode, with inset support
-    >
+    <header className="sticky top-0 z-50 w-full border-b border-[#FFD6D6]/20 bg-gradient-to-b from-[#FFF5E1]/95 to-[#FFE2E2]/95 pt-2 pb-2 backdrop-blur-xl dark:border-[#333]/20 dark:from-[#232323]/95 dark:to-[#1A1A1A]/95">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between whitespace-nowrap">
-          {/* Logo as link */}
+        <div className="flex h-16 items-center justify-between">
           <Link
             href="/"
             aria-label={t.header.home}
-            className="flex min-w-0 flex-shrink-0 items-center gap-2 rounded-xl focus:ring-2 focus:ring-[#FFD6D6] focus:outline-none"
+            className="flex min-w-0 flex-shrink-0 items-center gap-2 rounded-xl transition-transform hover:scale-105 focus:ring-2 focus:ring-[#FFD6D6] focus:outline-none"
           >
             <Image
               src="/icons/logo.png"
@@ -41,28 +37,27 @@ export default function Header() {
               priority
             />
           </Link>
-          {/* Desktop Navigation */}
+
           <DesktopNav />
-          {/* Right controls */}
-          <div className="ml-2 flex flex-shrink-0 items-center gap-1 sm:gap-2">
-            <div className="flex items-center gap-1 sm:gap-2">
+
+          <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 rounded-lg bg-[#FFF6F6]/50 p-1 backdrop-blur-sm dark:bg-[#232323]/50">
               <AccessibilitySettings />
-              {/* <LanguageSelector /> */}
               <ThemeSwitcher />
+              <LanguageSelector />
             </div>
-            {/* Mobile menu button: only show on mobile, always right-aligned, styled as in MobileMenu */}
+
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="ml-2 rounded-xl bg-gradient-to-b from-[#FFF5E1] to-[#FFE2E2] p-2 text-[#D72638] shadow-md transition hover:scale-105 focus:ring-2 focus:ring-[#FFD6D6] focus:outline-none sm:hidden dark:from-[#3A3A3A] dark:to-[#1A1A1A] dark:text-[#FFF5E1]"
+              className="ml-1 rounded-lg bg-[#FFF6F6]/50 p-1.5 text-[#D72638] backdrop-blur-sm transition hover:scale-105 focus:ring-2 focus:ring-[#FFD6D6] focus:outline-none sm:hidden dark:bg-[#232323]/50 dark:text-[#FFF5E1]"
               aria-label={t.header.menuOpen}
               type="button"
             >
-              <Menu className="h-6 w-6" />
+              <Menu className="h-4 w-4" />
             </button>
           </div>
         </div>
       </div>
-      {/* Mobile menu */}
       <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
     </header>
   )

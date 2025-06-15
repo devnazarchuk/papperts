@@ -127,10 +127,10 @@ export default function JobsPage() {
         </section>
 
         {/* Section Cards - Adaptive Grid */}
-        <section className="w-full overflow-hidden px-8 py-8 sm:px-10 sm:py-12 md:px-16">
+        <section className="w-full overflow-hidden py-8 sm:px-5 sm:px-12 md:px-12">
           <div className="mx-auto max-w-screen-lg">
             {/* Responsive grid: 1 col xs, 2 sm, 3 md, 4 lg+ */}
-            <div className="mx-auto mb-8 grid max-w-[98%] grid-cols-1 gap-4 sm:max-w-[95%] sm:gap-6 md:max-w-[90%] md:gap-8 lg:max-w-[85%] lg:gap-10">
+            <div className="mx-auto mb-8 grid max-w-[100%] grid-cols-1 gap-4 min-[425px]:grid-cols-2 sm:max-w-[95%] sm:gap-6 md:max-w-[90%] md:grid-cols-3 md:gap-8 lg:max-w-[85%] lg:grid-cols-4 lg:gap-10">
               {sections.map((sec, i) => (
                 <motion.a
                   key={sec.title}
@@ -138,22 +138,22 @@ export default function JobsPage() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.07, duration: 0.5, ease: 'easeOut' }}
-                  className="group flex h-full min-h-[120px] w-full cursor-pointer flex-col items-center rounded-[25px] border border-[#FFD2D2] bg-[#FFF6F6] p-4 text-center text-[#3A3A3A] shadow-[10px_10px_20px_e4c6c6,_-10px_-10px_20px_ffffff] transition-all hover:-translate-y-1 hover:shadow-xl dark:border-[#3A3A3A] dark:bg-[#232323] dark:text-[#FDEEEE] dark:shadow-[10px_10px_20px_181818,_-10px_-10px_20px_2a2a2a] dark:hover:shadow-[12px_12px_32px_181818,_-12px_-12px_32px_2a2a2a]"
+                  className="group flex h-full min-h-[120px] w-full cursor-pointer flex-col items-center rounded-[25px] border border-[#FFD2D2] bg-[#FFF6F6] p-4 px-0 text-center text-[#3A3A3A] shadow-[10px_10px_20px_e4c6c6,_-10px_-10px_20px_ffffff] transition-all hover:-translate-y-1 hover:shadow-xl sm:px-4 dark:border-[#3A3A3A] dark:bg-[#232323] dark:text-[#FDEEEE] dark:shadow-[10px_10px_20px_181818,_-10px_-10px_20px_2a2a2a] dark:hover:shadow-[12px_12px_32px_181818,_-12px_-12px_32px_2a2a2a]"
                   style={{ textDecoration: 'none' }}
                   aria-label={sec.title}
                 >
                   {/* Icon */}
                   <div className="mb-2 text-xl md:mb-4 md:text-3xl">{sec.icon}</div>
                   {/* Section title */}
-                  <h2 className="mb-1 text-[14px] font-extrabold text-[#c60627] transition-colors duration-200 md:mb-2 md:text-lg dark:text-[#EE0A24]">
+                  <h2 className="!md:text-lg mb-1 line-clamp-2 !text-[18px] font-extrabold text-[#c60627] transition-colors duration-200 md:mb-2 dark:text-[#EE0A24]">
                     {sec.title}
                   </h2>
                   {/* Section description */}
-                  <p className="mb-2 flex-1 text-[12px] text-[#232323] transition-colors duration-200 md:mb-4 md:text-base dark:text-[#FFF5E1]">
+                  <p className="!md:text-base mb-2 line-clamp-3 flex-1 !text-[12px] text-[#232323] transition-colors duration-200 md:mb-4 dark:text-[#FFF5E1]">
                     {sec.desc}
                   </p>
                   {/* Call to action */}
-                  <span className="mt-auto inline-block rounded-full bg-[#c60627] px-3 py-1.5 text-[12px] font-bold text-white shadow-md transition-all group-hover:bg-[#EE0A24] md:px-6 md:py-2 md:text-sm">
+                  <span className="!md:text-sm mt-auto inline-block rounded-full bg-[#c60627] px-3 py-1.5 !text-[12px] font-bold text-white shadow-md transition-all group-hover:bg-[#EE0A24] md:px-6 md:py-2">
                     {t.careers.more || 'Mehr erfahren'}
                   </span>
                 </motion.a>
@@ -199,11 +199,11 @@ export default function JobsPage() {
                     className="mb-3 h-18 w-18 rounded-full object-cover md:mb-5 md:h-24 md:w-24"
                   />
                   {/* Testimonial text */}
-                  <blockquote className="mb-2 text-[13px] text-[#c60627] italic transition-colors duration-200 md:mb-3 md:text-base dark:text-[#EE0A24]">
+                  <blockquote className="!md:text-base mb-2 line-clamp-4 !text-[13px] text-[#c60627] italic transition-colors duration-200 md:mb-3 dark:text-[#EE0A24]">
                     „{t.text}“
                   </blockquote>
                   {/* Testimonial author */}
-                  <div className="text-[12px] text-[#232323] transition-colors duration-200 md:text-sm dark:text-[#FFF5E1]">
+                  <div className="!md:text-sm line-clamp-1 !text-[12px] text-[#232323] transition-colors duration-200 dark:text-[#FFF5E1]">
                     {t.author}
                   </div>
                 </motion.div>
