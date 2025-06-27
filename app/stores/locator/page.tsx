@@ -1,7 +1,9 @@
 'use client'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { FaClock,FaMapMarkerAlt, FaPhone } from 'react-icons/fa'
 
+import { useLanguageStore } from '@/app/store/languageStore'
 import { PageWrapper } from '@/components/ui/PageWrapper'
 
 interface Store {
@@ -93,9 +95,23 @@ const stores: Store[] = [
       'Große Fenster und viel Platz - zum Sitzen, aber auch zum Sehen und Gesehen werden. Das Café in Vacha bietet in verschiedenen Sitzbereichen Möglichkeiten zum Entspannen und Genießen - zum Kaffeetrinken oder auch zum Essen.',
   },
 ]
+
+const translations = {
+  en: {
+    title: 'Our Locations',
+    description: 'Find your nearest Pappert store',
+    getDirections: 'Get Directions'
+  },
+  de: {
+    title: 'Unsere Filialen',
+    description: 'Finden Sie Ihre nächste Pappert Filiale',
+    getDirections: 'Route anzeigen'
+  }
+}
+
 export default function Page() {
-  const title = 'Unsere Filialen'
-  const description = ''
+  const { language } = useLanguageStore()
+  const t = translations[language]
   const heroImage = '/images/Stammhaus_-4317-768x512.jpg'
 
   return (
@@ -105,7 +121,7 @@ export default function Page() {
         <div className="absolute inset-0">
           <Image
             src={heroImage}
-            alt={title}
+            alt={t.title}
             width={768}
             height={512}
             priority
@@ -120,7 +136,7 @@ export default function Page() {
             className="mb-4 text-4xl font-extrabold transition-colors dark:text-[#FFA5A5]"
             style={{ fontFamily: 'Poppins, sans-serif' }}
           >
-            {title}
+            {t.title}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -128,7 +144,7 @@ export default function Page() {
             transition={{ delay: 0.2 }}
             className="max-w-2xl text-lg transition-colors dark:text-[#FAD2E1]"
           >
-            {description}
+            {t.description}
           </motion.p>
         </div>
       </section>
@@ -167,12 +183,26 @@ export default function Page() {
                   </p>
                 )}
                 <div className="space-y-2 text-gray-600 transition-colors dark:text-[#FAD2E1]">
-                  <p>{store.address}</p>
-                  <p>{store.city}</p>
-                  {store.phone && <p className="font-semibold">Tel: {store.phone}</p>}
+                  <p className="flex items-center gap-2">
+                    <FaMapMarkerAlt className="h-4 w-4 text-[#D72638] dark:text-[#FFA5A5]" />
+                    {store.address}
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <FaMapMarkerAlt className="h-4 w-4 text-[#D72638] dark:text-[#FFA5A5]" />
+                    {store.city}
+                  </p>
+                  {store.phone && (
+                    <p className="flex items-center gap-2 font-semibold">
+                      <FaPhone className="h-4 w-4 text-[#D72638] dark:text-[#FFA5A5]" />
+                      Tel: {store.phone}
+                    </p>
+                  )}
                   {store.hours && (
                     <p className="mt-4">
-                      <span className="font-semibold">Opening Hours:</span>
+                      <span className="flex items-center gap-2 font-semibold">
+                        <FaClock className="h-4 w-4 text-[#D72638] dark:text-[#FFA5A5]" />
+                        Opening Hours:
+                      </span>
                       <br />
                       {store.hours}
                     </p>
@@ -188,7 +218,7 @@ export default function Page() {
                     )
                   }
                 >
-                  Get Directions
+                  {t.getDirections}
                 </button>
               </div>
             </motion.div>

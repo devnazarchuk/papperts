@@ -30,6 +30,7 @@ export const translations = {
         title: 'Kontakt',
         phone: 'Telefon',
         email: 'E-Mail',
+        address: 'Adresse',
       },
       social: {
         title: 'Folgen Sie uns',
@@ -134,6 +135,7 @@ export const translations = {
         title: 'Contact',
         phone: 'Phone',
         email: 'Email',
+        address: 'Address',
       },
       social: {
         title: 'Follow Us',

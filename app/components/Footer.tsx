@@ -22,39 +22,48 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="mt-12 rounded-t-[20px] bg-[#FFF6F6] py-12 text-[#3A3A3A] shadow-[10px_10px_20px_#e4c6c6,_-10px_-10px_20px_#ffffff] dark:bg-[#232323] dark:text-[#FDEEEE] dark:shadow-[10px_10px_20px_#181818,_-10px_-10px_20px_#2a2a2a]">
+    <footer className="mt-12 rounded-t-[20px] bg-[var(--card-bg)] py-12 text-[var(--text-primary)] shadow-[var(--card-shadow)] dark:bg-[var(--card-bg)] dark:text-[var(--text-primary)] dark:shadow-[var(--card-shadow)]">
       <div className="container mx-auto px-4">
-        <div className="grid gap-8 md:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-3">
           {/* Über uns */}
           <div className="">
-            <h3 className="mb-4 flex items-center gap-2 font-[SF_Pro_Display,SF_Pro_Icons,Helvetica_Neue,Helvetica,Arial,sans-serif] text-lg font-extrabold text-[#D72638] dark:text-[#FFA5A5]">
-              <MapPin className="h-6 w-6 text-[#D72638]" />
+            <h3 className="mb-4 flex items-center gap-2 text-lg font-[var(--headline-font)] font-extrabold text-[var(--primary-accent)] dark:text-[var(--primary-accent)]">
+              <MapPin className="h-6 w-6 text-[var(--primary-accent)]" />
               {t.footer.about.title}
             </h3>
-            <p className="text-[#A88B8B]">{t.footer.about.description}</p>
+            <p className="text-[var(--text-secondary)]">{t.footer.about.description}</p>
           </div>
 
           {/* Kontakt */}
           <div className="">
-            <h3 className="mb-4 font-[SF_Pro_Display,SF_Pro_Icons,Helvetica_Neue,Helvetica,Arial,sans-serif] text-lg font-semibold">
+            <h3 className="mb-4 text-lg font-[var(--headline-font)] font-semibold">
               {t.footer.contact.title}
             </h3>
-            <ul className="space-y-2 text-[#A88B8B]">
+            <ul className="space-y-2 text-[var(--text-secondary)]">
               <li className="flex items-center gap-2">
-                <MapPin className="h-5 w-5 text-[#D72638]" />
-                Rhönstraße 11, 36124 Eichenzell
+                <MapPin className="h-5 w-5 text-[var(--primary-accent)]" />
+                {t.footer.contact.address}:{' '}
+                <a
+                  href="https://www.google.com/maps/place/papperts+GmbH+Caf%C3%A9+am+Backhaus/@50.4802931,9.7348601,340m/data=!3m1!1e3!4m15!1m8!3m7!1s0x47a3308a71ce7177:0x8a4a8a66923385ac!2sB%C3%BCrgermeister-Ebert-Stra%C3%9Fe+38,+36124+Eichenzell!3b1!8m2!3d50.4804622!4d9.7355232!16s%2Fg%2F11x33sb602!3m5!1s0x47a33152c612c193:0x6260b499cdf69f35!8m2!3d50.4804622!4d9.7355232!16s%2Fg%2F11x1bb5w_k?entry=ttu&g_ep=EgoyMDI1MDYwOS4xIKXMDSoASAFQAw%3D%3D"
+                  className="underline hover:text-[var(--primary-accent)]"
+                >
+                  Bürgermeister-Ebert-Straße 38, Eichenzell
+                </a>
               </li>
               <li className="flex items-center gap-2">
-                <Phone className="h-5 w-5 text-[#D72638]" />
+                <Phone className="h-5 w-5 text-[var(--primary-accent)]" />
                 {t.footer.contact.phone}:{' '}
-                <a href="tel:0665998660" className="underline hover:text-[#D72638]">
+                <a href="tel:0665998660" className="underline hover:text-[var(--primary-accent)]">
                   06659 9866-0
                 </a>
               </li>
               <li className="flex items-center gap-2">
-                <Mail className="h-5 w-5 text-[#D72638]" />
+                <Mail className="h-5 w-5 text-[var(--primary-accent)]" />
                 {t.footer.contact.email}:{' '}
-                <a href="mailto:info@papperts.de" className="underline hover:text-[#D72638]">
+                <a
+                  href="mailto:info@papperts.de"
+                  className="underline hover:text-[var(--primary-accent)]"
+                >
                   info@papperts.de
                 </a>
               </li>
@@ -63,7 +72,7 @@ export default function Footer() {
 
           {/* Social Media */}
           <div className="">
-            <h3 className="mb-4 font-[SF_Pro_Display,SF_Pro_Icons,Helvetica_Neue,Helvetica,Arial,sans-serif] text-lg font-semibold">
+            <h3 className="mb-4 text-lg font-[var(--headline-font)] font-semibold">
               {t.footer.social.title}
             </h3>
             <ul className="flex space-x-4">
@@ -72,7 +81,7 @@ export default function Footer() {
                   href="https://www.facebook.com/papperts/"
                   target="_blank"
                   rel="noopener"
-                  className="text-[#A88B8B] transition-colors hover:text-[#EE0A24]"
+                  className="text-[var(--text-secondary)] transition-colors hover:text-[var(--primary-accent)]"
                   aria-label={t.footer.social.facebook}
                 >
                   <Facebook className="h-6 w-6" />
@@ -83,7 +92,7 @@ export default function Footer() {
                   href="https://www.instagram.com/baeckerei_pappert/?hl=de"
                   target="_blank"
                   rel="noopener"
-                  className="text-[#A88B8B] transition-colors hover:text-[#EE0A24]"
+                  className="text-[var(--text-secondary)] transition-colors hover:text-[var(--primary-accent)]"
                   aria-label={t.footer.social.instagram}
                 >
                   <Instagram className="h-6 w-6" />
@@ -94,7 +103,7 @@ export default function Footer() {
                   href="https://www.linkedin.com/company/papperts-gmbh-&-co.-kg/"
                   target="_blank"
                   rel="noopener"
-                  className="text-[#A88B8B] transition-colors hover:text-[#EE0A24]"
+                  className="text-[var(--text-secondary)] transition-colors hover:text-[var(--primary-accent)]"
                   aria-label={t.footer.social.linkedin}
                 >
                   <Linkedin className="h-6 w-6" />
@@ -105,7 +114,7 @@ export default function Footer() {
                   href="https://www.tiktok.com/@papperts_baeckerei"
                   target="_blank"
                   rel="noopener"
-                  className="text-[#A88B8B] transition-colors hover:text-[#EE0A24]"
+                  className="text-[var(--text-secondary)] transition-colors hover:text-[var(--primary-accent)]"
                   aria-label={t.footer.social.tiktok}
                 >
                   <svg
@@ -129,12 +138,12 @@ export default function Footer() {
         </div>
 
         {/* Wichtige Links (legal) - horizontal at the very bottom */}
-        <div className="mt-12 flex flex-wrap justify-center gap-4 border-t border-[#FFA5A5] pt-6 dark:border-[#3A3A3A]">
+        <div className="mt-12 flex flex-wrap justify-center gap-4 border-t border-[var(--primary-accent)] pt-6 dark:border-[var(--primary-accent)]">
           {legalLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="rounded-[12px] px-2 py-1 font-[SF_Pro_Display,SF_Pro_Icons,Helvetica_Neue,Helvetica,Arial,sans-serif] text-sm font-medium text-[#A88B8B] transition-colors hover:text-[#D72638] dark:text-[#FAD2E1] dark:hover:text-[#FFA5A5]"
+              className="rounded-[12px] px-2 py-1 text-sm font-[var(--body-font)] font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--primary-accent)] dark:text-[var(--primary-accent)] dark:hover:text-[var(--primary-accent)]"
             >
               {link.name}
             </a>
@@ -142,7 +151,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 text-center">
-          <p className="text-sm text-[#A88B8B] dark:text-[#FAD2E1]">
+          <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--primary-accent)]">
             {t.footer.copyright.replace('{year}', new Date().getFullYear().toString())}
           </p>
         </div>

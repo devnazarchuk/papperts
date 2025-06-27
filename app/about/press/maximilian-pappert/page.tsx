@@ -3,7 +3,69 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { FaUserGraduate } from 'react-icons/fa'
 
+import { useLanguageStore } from '@/app/store/languageStore'
+
+type Translations = {
+  de: {
+    title: string
+    subtitle: string
+    description: string
+    sectionTitle: string
+    sectionContent: string
+    listItems: string[]
+    conclusion: string
+  }
+  en: {
+    title: string
+    subtitle: string
+    description: string
+    sectionTitle: string
+    sectionContent: string
+    listItems: string[]
+    conclusion: string
+  }
+}
+
+const translations: Translations = {
+  de: {
+    title: 'Maximilian Pappert – Neuer Bäckermeister',
+    subtitle: 'Tradition & Moderne',
+    description:
+      'Mit dem erfolgreichen Abschluss seiner Meisterprüfung setzt Maximilian Pappert die Familientradition fort und bringt frischen Wind in unsere Backstube.',
+    sectionTitle: 'Tradition & Moderne',
+    sectionContent:
+      'Maximilian Pappert ist die 8. Generation der Pappert-Bäckerfamilie. Mit seiner Meisterprüfung bringt er nicht nur handwerkliches Können, sondern auch neue Ideen und moderne Techniken in unser Unternehmen.',
+    listItems: [
+      '11 Meister in der Backstube',
+      'Verbindung von Tradition und Innovation',
+      'Fokus auf Qualität und Regionalität',
+      'Stolz auf die Familiengeschichte',
+    ],
+    conclusion:
+      'Wir gratulieren Maximilian herzlich und freuen uns auf viele neue Backideen und die Fortführung unserer Erfolgsgeschichte!',
+  },
+  en: {
+    title: 'Maximilian Pappert – New Master Baker',
+    subtitle: 'Tradition & Modernity',
+    description:
+      "With the successful completion of his master's examination, Maximilian Pappert continues the family tradition and brings fresh ideas to our bakery.",
+    sectionTitle: 'Tradition & Modernity',
+    sectionContent:
+      "Maximilian Pappert is the 8th generation of the Pappert baker family. With his master's examination, he brings not only artisanal skills but also new ideas and modern techniques to our company.",
+    listItems: [
+      '11 master bakers in the bakery',
+      'Combining tradition and innovation',
+      'Focus on quality and regionality',
+      'Pride in family history',
+    ],
+    conclusion:
+      'We congratulate Maximilian and look forward to many new baking ideas and continuing our success story!',
+  },
+}
+
 export default function MaximilianPappertPage() {
+  const language = useLanguageStore((state) => state.language)
+
   return (
     <motion.div
       initial="hidden"
@@ -24,12 +86,11 @@ export default function MaximilianPappertPage() {
               className="text-4xl font-bold text-[#EE0A24] dark:text-[#EE0A24]"
               style={{ fontFamily: 'Poppins, sans-serif' }}
             >
-              Maximilian Pappert – Neuer Bäckermeister
+              {translations[language].title}
             </h1>
           </div>
           <p className="mx-auto max-w-2xl text-lg text-gray-700 dark:text-gray-300">
-            Mit dem erfolgreichen Abschluss seiner Meisterprüfung setzt Maximilian Pappert die
-            Familientradition fort und bringt frischen Wind in unsere Backstube.
+            {translations[language].description}
           </p>
         </motion.div>
         <motion.div
@@ -39,30 +100,24 @@ export default function MaximilianPappertPage() {
           className="mb-8 rounded-[25px] bg-white/80 p-8 shadow-lg dark:bg-[#232323]/80"
         >
           <Image
-            src="/images/press/maximilian-pappert.jpg"
-            alt="Maximilian Pappert"
+            src="/images/Maximilian_Pappert_ist_neuer_Baeckermeister.jpg"
+            alt={translations[language].title}
             width={800}
             height={600}
             className="h-auto w-full rounded-lg"
           />
           <h2 className="mb-4 text-2xl font-bold text-[#EE0A24] dark:text-[#EE0A24]">
-            Tradition & Moderne
+            {translations[language].sectionTitle}
           </h2>
           <p className="mb-4 text-gray-700 dark:text-gray-300">
-            Maximilian Pappert ist die 8. Generation der Pappert-Bäckerfamilie. Mit seiner
-            Meisterprüfung bringt er nicht nur handwerkliches Können, sondern auch neue Ideen und
-            moderne Techniken in unser Unternehmen.
+            {translations[language].sectionContent}
           </p>
           <ul className="mb-4 list-disc pl-6 text-gray-700 dark:text-gray-300">
-            <li>11 Meister in der Backstube</li>
-            <li>Verbindung von Tradition und Innovation</li>
-            <li>Fokus auf Qualität und Regionalität</li>
-            <li>Stolz auf die Familiengeschichte</li>
+            {translations[language].listItems.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
           </ul>
-          <p className="text-gray-700 dark:text-gray-300">
-            Wir gratulieren Maximilian herzlich und freuen uns auf viele neue Backideen und die
-            Fortführung unserer Erfolgsgeschichte!
-          </p>
+          <p className="text-gray-700 dark:text-gray-300">{translations[language].conclusion}</p>
         </motion.div>
       </div>
     </motion.div>

@@ -108,14 +108,14 @@ export function CardSlider({
       {/* Navigation Arrows */}
       <button
         onClick={handlePrevious}
-        className="absolute top-1/2 left-0 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-lg transition-colors hover:bg-white dark:bg-gray-800/80 dark:hover:bg-gray-800"
+        className="absolute top-1/2 left-0 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-lg transition-colors hover:bg-white dark:bg-[#18181b] dark:hover:bg-[#000]"
         aria-label="Previous card"
       >
         <ChevronLeft className="h-4 w-4 text-gray-600 dark:text-gray-300" />
       </button>
       <button
         onClick={handleNext}
-        className="absolute top-1/2 right-0 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-lg transition-colors hover:bg-white dark:bg-gray-800/80 dark:hover:bg-gray-800"
+        className="absolute top-1/2 right-0 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-lg transition-colors hover:bg-white dark:bg-[#18181b] dark:hover:bg-[#000]"
         aria-label="Next card"
       >
         <ChevronRight className="h-4 w-4 text-gray-600 dark:text-gray-300" />
@@ -159,8 +159,8 @@ export function CardSlider({
                 onClick={() => handleCardClick(index)}
               >
                 <div
-                  className={`relative flex flex-col items-center justify-center overflow-hidden rounded-2xl shadow-lg transition-all duration-300 ${
-                    isActive ? 'ring-4 ring-[#D72638] dark:ring-[#FFA5A5]' : ''
+                  className={`relative flex flex-col items-center justify-center overflow-hidden rounded-2xl shadow-[var(--card-shadow)] transition-all duration-300 ${
+                    isActive ? 'ring-4 ring-[var(--primary-accent)]' : ''
                   } ${
                     position === 'center'
                       ? 'h-[280px] w-[200px] sm:h-[320px] sm:w-[220px]'
@@ -197,7 +197,7 @@ export function CardSlider({
                             e.stopPropagation()
                             handleCardClick(index)
                           }}
-                          className="flex cursor-pointer items-center gap-2 rounded-full bg-[#D72638] px-4 py-1.5 text-sm font-bold text-white shadow-lg transition-all select-none hover:scale-105 hover:shadow-xl dark:bg-[#d72638] dark:text-[#ffffff]"
+                          className="flex cursor-pointer items-center gap-2 rounded-full bg-[var(--primary-accent)] px-4 py-1.5 text-sm font-bold text-white shadow-[var(--card-shadow)] transition-all select-none hover:scale-105 hover:shadow-[var(--card-shadow-hover)] dark:bg-[var(--primary-accent)] dark:text-white"
                         >
                           {cardTranslation?.button || 'Learn more'}
                           <ArrowDown className="h-3 w-3" />

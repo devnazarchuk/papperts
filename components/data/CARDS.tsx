@@ -67,19 +67,19 @@ export const CARDS: CardItem[] = [
   },
   {
     id: 'coupons-aktionen',
-    title: 'Coupons & Aktionen',
+    title: 'Coupons Aktionen',
     description: 'Sichere dir aktuelle Rabatte und Gutscheine.',
     role: 'Customer',
   },
   {
     id: 'news-presse',
-    title: 'News & Presse',
+    title: 'News Presse',
     description: 'Bleibe auf dem Laufenden mit Neuigkeiten und Presse.',
     role: 'All',
   },
   {
     id: 'kontakt-clubs',
-    title: 'Kontakt & Clubs',
+    title: 'Kontakt Clubs',
     description: 'Nimm Kontakt auf oder entdecke unsere Vereinsangebote.',
     role: 'All',
   },
@@ -142,7 +142,7 @@ export function useCTACards() {
     {
       title: t.contact.title,
       description: t.contact.description,
-      href: '/about/clubs',
+      href: '/contact',
       icon: () => <Mail size={40} className="text-[#D72638]" />,
     },
   ]

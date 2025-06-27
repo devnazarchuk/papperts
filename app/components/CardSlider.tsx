@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { ArrowDown } from 'lucide-react'
 import Image from 'next/image'
 
 import { useAccessibilityStore } from '@/app/store/accessibilityStore'
@@ -53,6 +54,11 @@ export default function CardSlider({ cards, role }: CardSliderProps) {
 
   const size = getCardSize()
 
+  const handleCardClick = (index: number) => {
+    // Тут можна додати логіку для обробки кліку по картці
+    console.log('Card clicked:', index)
+  }
+
   return (
     <div className="relative w-full overflow-hidden">
       <div className="flex items-center justify-center gap-4">
@@ -69,7 +75,7 @@ export default function CardSlider({ cards, role }: CardSliderProps) {
               key={card.id}
               className={`relative ${
                 isCenter ? size.center : size.side
-              } overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 dark:bg-gray-800`}
+              } overflow-hidden rounded-xl bg-[var(--card-bg)] shadow-[var(--card-shadow)] transition-all duration-300 dark:bg-[var(--card-bg)] dark:shadow-[var(--card-shadow)]`}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -86,20 +92,29 @@ export default function CardSlider({ cards, role }: CardSliderProps) {
                     />
                   </div>
                 )}
-                <h3 className={`mb-2 font-bold ${size.text}`} aria-label={roleTranslation.title}>
+                <h3
+                  className={`mb-2 font-bold ${size.text} text-[var(--primary-accent)]`}
+                  aria-label={roleTranslation.title}
+                >
                   {/* Card title, ensure accessible name matches visible label */}
                   {roleTranslation.title}
                 </h3>
-                <p className={`mb-4 text-gray-700 dark:text-[#FFF5E1] ${size.text}`}>
+                <p
+                  className={`mb-4 text-[var(--text-secondary)] dark:text-[var(--text-primary)] ${size.text}`}
+                >
                   {/* Card description, min 12px for accessibility, high-contrast for dark mode */}
                   {roleTranslation.description}
                 </p>
                 <button
-                  className={`mt-auto rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600 ${size.button}`}
-                  aria-label={roleTranslation.button}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handleCardClick(index)
+                  }}
+                  className="flex cursor-pointer items-center gap-2 rounded-full bg-[#FFF5E1] px-4 py-1.5 text-sm font-bold text-[#D72638] shadow-[var(--card-shadow)] transition-all select-none hover:scale-105 hover:shadow-[var(--card-shadow-hover)] dark:bg-[#FFF5E1] dark:text-[#D72638]"
                 >
                   {/* Button text matches visible label for accessibility */}
                   {roleTranslation.button}
+                  <ArrowDown className="h-3 w-3" />
                 </button>
               </div>
             </motion.div>

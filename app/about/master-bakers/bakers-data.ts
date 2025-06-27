@@ -234,3 +234,34 @@ export function slugify(name: string): string {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
 }
+
+// Import translations
+import { Language } from '@/app/store/languageStore'
+
+import { bakersTranslations } from './bakers-translations'
+
+// Function to get translated baker data
+export function getTranslatedBaker(baker: Baker, language: Language): Baker {
+  const translation = bakersTranslations[language][baker.name]
+  if (!translation) return baker
+
+  return {
+    ...baker,
+    role: translation.role,
+    department: translation.department,
+    statements: [
+      {
+        label: translation.statements.job.label,
+        text: translation.statements.job.text,
+      },
+      {
+        label: translation.statements.company.label,
+        text: translation.statements.company.text,
+      },
+      {
+        label: translation.statements.master.label,
+        text: translation.statements.master.text,
+      },
+    ],
+  }
+}

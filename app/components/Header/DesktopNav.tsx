@@ -20,7 +20,7 @@ export function DesktopNav() {
 
   return (
     <div
-      className="hidden items-center gap-x-2 whitespace-nowrap sm:flex md:gap-x-4 lg:gap-x-8"
+      className="hidden items-center gap-x-1 whitespace-nowrap sm:flex md:gap-x-2 lg:gap-x-4"
       style={{ minWidth: 0 }}
     >
       {navLinks.map((link) => (
@@ -28,10 +28,10 @@ export function DesktopNav() {
           key={link.href}
           href={link.href}
           aria-current={pathname === link.href ? 'page' : undefined}
-          className={`truncate px-2 py-1 text-sm font-semibold sm:px-2 sm:py-1 md:px-3 md:py-1.5 md:text-base lg:px-5 lg:py-2 lg:text-lg ${
+          className={`text-m truncate rounded-md px-2.5 py-1 font-medium transition-all duration-200 hover:bg-[#FFF6F6]/50 hover:text-[#D72638] dark:hover:bg-[#232323]/50 dark:hover:text-[#FFF5E1] ${
             pathname === link.href
               ? 'bg-[#FFD6D6] text-[#D72638] dark:bg-[#232323] dark:text-[#FFF5E1]'
-              : ''
+              : 'text-[#3A3A3A] dark:text-[#FAD2E1]'
           }`}
         >
           {link.name}

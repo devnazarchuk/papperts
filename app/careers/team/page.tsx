@@ -124,7 +124,7 @@ const jobWorlds = [
   },
 ]
 
-export default function CareersTeamPage() {
+export default function TeamPage() {
   const { language } = useLanguageStore()
   const t = teamTranslations[language]
 
@@ -133,26 +133,78 @@ export default function CareersTeamPage() {
       {/* Header Section */}
       <section className="w-full px-4 py-8">
         <div className="mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="mb-12 flex flex-col items-center"
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="mb-8 text-center text-4xl font-bold text-[#c60627] transition-colors duration-200 dark:text-[#EE0A24]"
+            style={{
+              fontFamily:
+                'SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif',
+            }}
           >
-            <Image
-              src="/soft-images/job-chef.jpg"
-              alt="Pappert Team"
-              width={180}
-              height={180}
-              className="mb-6 rounded-full border-4 border-[#FFD6D6] shadow-xl transition-colors duration-200 dark:border-[#2a2a2a]"
-              priority
-            />
-            <h1 className="mb-2 text-center text-3xl font-bold text-[#c60627] transition-colors duration-200 sm:text-4xl dark:text-[#EE0A24]">
-              {t.title}
-            </h1>
-            <p className="mx-auto max-w-2xl text-center text-base text-[#3A3A3A] transition-colors duration-200 sm:text-lg dark:text-gray-300">
-              {t.subtitle}
+            {t.title}
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="mx-auto mb-12 max-w-2xl text-center text-lg text-[#3A3A3A] transition-colors duration-200 dark:text-gray-200"
+            style={{
+              fontFamily:
+                'SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif',
+            }}
+          >
+            {t.subtitle}
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="w-full px-4 py-8">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="rounded-[25px] bg-[#FFF6F6] p-8 shadow-[10px_10px_24px_#e4c6c6,_-10px_-10px_24px_#ffffff] dark:bg-[#232323] dark:shadow-[10px_10px_24px_#181818,_-10px_-10px_24px_#2a2a2a]"
+          >
+            <h2 className="mb-4 text-center text-2xl font-bold text-[#c60627] transition-colors duration-200 dark:text-[#EE0A24]">
+              {t.sectionTitle}
+            </h2>
+            <p className="mb-8 text-center text-gray-600 transition-colors duration-200 dark:text-gray-300">
+              {t.sectionContent}
             </p>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {t.teamMembers.map((member, index) => (
+                <motion.div
+                  key={member.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2, ease: 'easeOut' }}
+                  className="flex flex-col items-center rounded-lg bg-white p-6 shadow-md transition-colors duration-200 dark:bg-gray-800"
+                >
+                  <div className="mb-4 h-32 w-32 overflow-hidden rounded-full">
+                    <Image
+                      src={`/images/team/${member.name.toLowerCase().replace(' ', '-')}.jpg`}
+                      alt={member.name}
+                      width={128}
+                      height={128}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <h3 className="mb-2 text-xl font-bold text-[#c60627] transition-colors duration-200 dark:text-[#EE0A24]">
+                    {member.name}
+                  </h3>
+                  <p className="mb-4 text-sm font-medium text-gray-600 transition-colors duration-200 dark:text-gray-300">
+                    {member.position}
+                  </p>
+                  <p className="text-center text-gray-600 transition-colors duration-200 dark:text-gray-300">
+                    {member.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
